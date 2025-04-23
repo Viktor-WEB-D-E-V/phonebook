@@ -4,9 +4,13 @@ import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
 
 function App() {
+  const submitHandler = (data) => {
+    console.log(data);
+  };
+
   return (
     <>
-      <ContactForm />
+      <ContactForm onSubmit={submitHandler} />
       <SearchBox />
       <ContactList />
     </>
