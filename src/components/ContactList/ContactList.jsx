@@ -1,10 +1,12 @@
 import "./ContactList.css";
 import ContactListItem from "../ContactListItem/ContactListItem";
 
-const ContactList = () => {
+const ContactList = ({ contactsList }) => {
   return (
     <>
-      <ContactListItem />
+      {contactsList.map((contact) => {
+        return <ContactListItem key={contact.id} contact={contact} />;
+      })}
     </>
   );
 };
