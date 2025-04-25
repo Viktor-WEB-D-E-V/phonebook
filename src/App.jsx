@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 import "./App.css";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SearchBox from "./components/SearchBox/SearchBox";
@@ -14,9 +16,13 @@ function App() {
 
   const [searchName, setSearchName] = useState("");
 
-  const submitHandler = (data) => {
-    console.log(data);
-    console.log(contactsList);
+  const submitHandler = ({ name, phone }) => {
+    const newContact = {
+      id: nanoid(),
+      name,
+      phone,
+    };
+    setContactsList((prev) => [...prev, newContact]);
   };
 
   const handleSearchName = (value) => {
