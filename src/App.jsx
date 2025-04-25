@@ -12,16 +12,28 @@ function App() {
     { id: "id-4", name: "Annie Copeland", phone: "227-91-26" },
   ]);
 
+  const [searchName, setSearchName] = useState("");
+
   const submitHandler = (data) => {
     console.log(data);
     console.log(contactsList);
   };
 
+  const handleSearchName = (value) => {
+    setSearchName(value);
+  };
+
+  const filteredContacts = searchName
+    ? contactsList.filter((contact) =>
+        contact.name.toLowerCase().includes(searchName.toLowerCase())
+      )
+    : contactsList;
+
   return (
     <div className="container">
       <ContactForm onSubmit={submitHandler} />
-      <SearchBox />
-      <ContactList contactsList={contactsList} />
+      <SearchBox onSearch={handleSearchName} />
+      <ContactList contactsList={filteredContacts} />
     </div>
   );
 }
