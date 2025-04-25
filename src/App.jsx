@@ -18,11 +18,11 @@ function App() {
   };
 
   return (
-    <>
+    <div className="container">
       <ContactForm onSubmit={submitHandler} />
       <SearchBox />
       <ContactList contactsList={contactsList} />
-    </>
+    </div>
   );
 }
 
