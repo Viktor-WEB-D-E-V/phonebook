@@ -1,4 +1,5 @@
 import "./SearchBox.css";
+import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
 const SearchBox = ({ onSearch }) => {
   const [value, setValue] = useState("");
@@ -11,10 +12,17 @@ const SearchBox = ({ onSearch }) => {
 
   return (
     <div className="contact-search-form">
-      <label>
-        <p>Find contanct by name</p>
-        <input type="text" value={value} onChange={onUpdateSearch} />
-      </label>
+      <p className="search-text">Find contanct by name</p>
+      <div className="search-wrapper">
+        <FaSearch className="search-icon" />
+        <input
+          className="search-input"
+          type="text"
+          placeholder="Name"
+          value={value}
+          onChange={onUpdateSearch}
+        />
+      </div>
     </div>
   );
 };
