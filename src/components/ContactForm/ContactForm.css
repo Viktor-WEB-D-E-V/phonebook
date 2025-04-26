@@ -1,0 +1,31 @@
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  border: 1px solid black;
+  border-radius: 8px;
+
+  padding: 10px;
+}
+.form-label {
+  width: 100%;
+}
+.form-input {
+  width: 100%;
+  font-size: 16px;
+}
+.form-submit-btn {
+  border: 1px solid black;
+  border-radius: 8px;
+
+  padding: 10px 25px;
+}
+
+.form-submit-btn:hover {
+  background-color: black;
+  color: white;
+}

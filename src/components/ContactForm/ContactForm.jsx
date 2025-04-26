@@ -23,19 +23,21 @@ class ContactForm extends Component {
     const { name, phone } = this.state;
 
     return (
-      <form onSubmit={this.handleOnSubmit}>
-        <label>
+      <form className="contact-form" onSubmit={this.handleOnSubmit}>
+        <label className="form-label">
           Name
           <input
+            className="form-input"
             type="text"
             name="name"
             value={name}
             onChange={this.handleOnChange}
           />
         </label>
-        <label>
+        <label className="form-label">
           Number
           <input
+            className="form-input"
             type="phone"
             name="phone"
             value={phone}
@@ -43,7 +45,9 @@ class ContactForm extends Component {
           />
         </label>
 
-        <button type="submit">Submit</button>
+        <button className="form-submit-btn" type="submit">
+          Submit
+        </button>
       </form>
     );
   }
