@@ -29,6 +29,10 @@ function App() {
     setSearchName(value);
   };
 
+  const handleDeleteContact = (id) => {
+    const updateList = contactsList.filter((contact) => contact.id !== id);
+    setContactsList(updateList);
+  };
   const filteredContacts = searchName
     ? contactsList.filter((contact) =>
         contact.name.toLowerCase().includes(searchName.toLowerCase())
@@ -39,7 +43,7 @@ function App() {
     <div className="container">
       <ContactForm onSubmit={submitHandler} />
       <SearchBox onSearch={handleSearchName} />
-      <ContactList contactsList={filteredContacts} />
+      <ContactList onDelete={handleDeleteContact} contactsList={filteredContacts} />
     </div>
   );
 }
