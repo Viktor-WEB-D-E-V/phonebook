@@ -4,15 +4,32 @@ import "./App.css";
 import ContactForm from "./components/ContactForm/ContactForm";
 import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const LOCALSTORAGE_KEY = "contact-list";
 
 function App() {
-  const [contactsList, setContactsList] = useState([
-    { id: "id-1", name: "Rosie Simpson", phone: "459-12-56" },
-    { id: "id-2", name: "Hermione Kline", phone: "443-89-12" },
-    { id: "id-3", name: "Eden Clements", phone: "645-17-79" },
-    { id: "id-4", name: "Annie Copeland", phone: "227-91-26" },
-  ]);
+  const [contactsList, setContactsList] = useState(() => {
+    const savedContacts = JSON.parse(
+      window.localStorage.getItem(LOCALSTORAGE_KEY)
+    );
+    if (savedContacts !== null) {
+      return savedContacts;
+    }
+
+    return [
+      { id: "id-1", name: "Rosie Simpson", phone: "459-12-56" },
+      { id: "id-2", name: "Hermione Kline", phone: "443-89-12" },
+      { id: "id-3", name: "Eden Clements", phone: "645-17-79" },
+      { id: "id-4", name: "Annie Copeland", phone: "227-91-26" },
+    ];
+  });
+
+  useEffect(() => {
+    const contactListStringify = JSON.stringify(contactsList);
+
+    window.localStorage.setItem(LOCALSTORAGE_KEY, contactListStringify);
+  }, [contactsList]);
 
   const [searchName, setSearchName] = useState("");
 
@@ -43,7 +60,10 @@ function App() {
     <div className="container">
       <ContactForm onSubmit={submitHandler} />
       <SearchBox onSearch={handleSearchName} />
-      <ContactList onDelete={handleDeleteContact} contactsList={filteredContacts} />
+      <ContactList
+        onDelete={handleDeleteContact}
+        contactsList={filteredContacts}
+      />
     </div>
   );
 }
