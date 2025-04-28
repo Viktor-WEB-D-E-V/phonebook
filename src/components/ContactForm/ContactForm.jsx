@@ -1,61 +1,73 @@
-import { Component } from "react";
 import "./ContactForm.css";
-
-class ContactForm extends Component {
-  state = {
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as yup from "yup";
+const ContactForm = ({ onSubmit }) => {
+  const initialValues = {
     name: "",
     phone: "",
   };
 
-  handleOnChange = (e) => {
-    const { name, value } = e.currentTarget;
+  const schema = yup.object().shape({
+    name: yup.string().min(3).max(50).required(),
+    phone: yup.string().min(9).required(),
+  });
 
-    this.setState({
-      [name]: value,
-    });
+  const handleSubmit = (values, { resetForm }) => {
+    onSubmit(values);
+    resetForm();
   };
 
-  handleOnSubmit = (e) => {
-    e.preventDefault();
-    this.props.onSubmit(this.state);
-
-    this.setState({
-      name: "",
-      phone: "",
-    });
-  };
-  render() {
-    const { name, phone } = this.state;
-
-    return (
-      <form className="contact-form" onSubmit={this.handleOnSubmit}>
-        <label className="form-label">
+  return (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={schema}
+    >
+      <Form className="contact-form">
+        <label className="form-label" htmlFor="name">
           Name
-          <input
-            className="form-input"
-            type="text"
-            name="name"
-            value={name}
-            onChange={this.handleOnChange}
-          />
+          <Field className="form-input" type="text" name="name" />
+          <ErrorMessage name="name" component={"div"} />
         </label>
-        <label className="form-label">
+        <label className="form-label" htmlFor="phone">
           Number
-          <input
-            className="form-input"
-            type="phone"
-            name="phone"
-            value={phone}
-            onChange={this.handleOnChange}
-          />
+          <Field className="form-input" type="phone" name="phone" />
+          <ErrorMessage name="phone" component={"div"} />
         </label>
-
         <button className="form-submit-btn" type="submit">
           Submit
         </button>
-      </form>
-    );
-  }
-}
+      </Form>
+    </Formik>
+  );
+};
+
+// class ContactForm extends Component {
+//   state = {
+//     name: "",
+//     phone: "",
+//   };
+
+//   handleOnChange = (e) => {
+//     const { name, value } = e.currentTarget;
+
+//     this.setState({
+//       [name]: value,
+//     });
+//   };
+
+//   handleOnSubmit = (e) => {
+//     e.preventDefault();
+//     this.props.onSubmit(this.state);
+
+//     this.setState({
+//       name: "",
+//       phone: "",
+//     });
+//   };
+//   render() {
+//     const { name, phone } = this.state;
+//   }
+// }
 
 export default ContactForm;
