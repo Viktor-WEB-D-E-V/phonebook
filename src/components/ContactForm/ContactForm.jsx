@@ -27,12 +27,12 @@ const ContactForm = ({ onSubmit }) => {
         <label className="form-label" htmlFor="name">
           Name
           <Field className="form-input" type="text" name="name" />
-          <ErrorMessage name="name" component={"div"} />
+          <ErrorMessage className="error" name="name" component={"div"} />
         </label>
         <label className="form-label" htmlFor="phone">
           Number
           <Field className="form-input" type="phone" name="phone" />
-          <ErrorMessage name="phone" component={"div"} />
+          <ErrorMessage className="error" name="phone" component={"div"} />
         </label>
         <button className="form-submit-btn" type="submit">
           Submit
@@ -41,33 +41,5 @@ const ContactForm = ({ onSubmit }) => {
     </Formik>
   );
 };
-
-// class ContactForm extends Component {
-//   state = {
-//     name: "",
-//     phone: "",
-//   };
-
-//   handleOnChange = (e) => {
-//     const { name, value } = e.currentTarget;
-
-//     this.setState({
-//       [name]: value,
-//     });
-//   };
-
-//   handleOnSubmit = (e) => {
-//     e.preventDefault();
-//     this.props.onSubmit(this.state);
-
-//     this.setState({
-//       name: "",
-//       phone: "",
-//     });
-//   };
-//   render() {
-//     const { name, phone } = this.state;
-//   }
-// }
 
 export default ContactForm;
